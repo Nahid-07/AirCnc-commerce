@@ -1,9 +1,39 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { Link } from 'react-router-dom'
 import PrimaryButton from '../../Components/Button/PrimaryButton'
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Signup = () => {
+  const {createUser,updateUserProfile,verifyEmail,user} = useContext(AuthContext);
+  console.log(user);
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    const name = e.target.name.value;
+    const image = e.target.image.files[0];
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const formData = new FormData();
+    formData.append('image', image);
+    const url =  "https://api.imgbb.com/1/upload?key=afef7a18a343b614ef922e54a0d39132"
+    // imgBB photo url
+    fetch(url,{
+      method: "POST",
+      body: formData
+    }).then(res => res.json())
+    .then(data => {
+      // create user
+      createUser(email,password).then(() => {
+        // update profile
+        updateUserProfile(name,data.data.display_url)
+        .then(()=>{
+          // verifyEmail
+          verifyEmail().then(()=> {}).catch(err => console.log(err.message))
+        }).catch(err => console.log(err.message))
+      }).catch(err => console.log(err.message))
+
+    })
+  }
   return (
     <div className='flex justify-center items-center pt-8'>
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
@@ -12,6 +42,7 @@ const Signup = () => {
           <p className='text-sm text-gray-400'>Create a new account</p>
         </div>
         <form
+          onSubmit={handleSubmit}
           noValidate=''
           action=''
           className='space-y-12 ng-untouched ng-pristine ng-valid'
