@@ -22,9 +22,9 @@ const Home = () => {
         <SearchForm />
       </div>
       <div className="flex-1">
-      <div>
+      <div className="mt-10">
           <div className="flex justify-between px-4">
-            <p className="text-xl font-bold">Experiences</p>
+            <p className="text-xl font-bold">Homes</p>
             <Link to="/coming-soon">
               <p>See All</p>
             </Link>
