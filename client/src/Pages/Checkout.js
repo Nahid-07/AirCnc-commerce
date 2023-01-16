@@ -131,6 +131,8 @@ const Checkout = () => {
               <WhosComing
                 setSelectedIndex={setSelectedIndex}
                 host={homeData?.host}
+                bookingData={bookingData}
+                setBookingData={setBookingData}
               />
             </Tab.Panel>
             <Tab.Panel>
