@@ -7,6 +7,7 @@ import ReviewHouse from "../Components/ReviewHouse";
 import WhosComing from "../Components/WhosComing";
 import CheckoutCart from "../Components/CheckoutCart";
 import Payment from "../Components/Payment";
+import { saveBookingData } from "../api/booking";
 
 const Checkout = () => {
   const { user } = useContext(AuthContext);
@@ -38,19 +39,21 @@ const Checkout = () => {
   });
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-    const handleBooking = () => {
-      console.log(bookingData)
+  const handleBooking = () => {
+    console.log(bookingData);
 
-    //   saveBooking(bookingData)
-    //     .then(data => {
-    //       console.log(data)
-    //       toast.success('Booking Successful!')
-    //     })
-    //     .catch(err => {
-    //       console.log(err)
-    //       toast.error(err?.message)
-    //     })
-    }
+    saveBookingData(bookingData)
+      .then((data) => {
+        if(data.acknowledged){
+          toast.success('Payment sucessfull and reserved')
+        }
+      })
+      .catch((err) =>{
+        if(err){
+          toast.error(err.message)
+        }
+      });
+  };
 
   return (
     <div className="md:flex gap-5 items-start justify-between sm:mx-10 md:mx-20 px-4 lg:mx-40 py-4">
