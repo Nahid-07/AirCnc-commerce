@@ -25,6 +25,7 @@ async function run() {
   try {
     const homesCollection = client.db("aircncdb").collection("homes");
     const usersCollection = client.db("aircncdb").collection("users");
+    const bookingsCollection = client.db("aircncdb").collection("bookings");
 
     app.put("/user/:email", async (req, res) => {
       const email = req.params.email;
@@ -44,6 +45,15 @@ async function run() {
       const token = jwt.sign(user, process.env.TOKEN, { expiresIn: "1d" });
       console.log(token);
       res.send({ result, token });
+    });
+
+    // sending booking data
+
+    app.post("/bookings", async (req, res) => {
+      const bookingData = req.body;
+      const result = await bookingsCollection.insertOne(bookingData);
+      console.log(result);
+      res.send(result);
     });
 
     console.log("Database Connected...");
