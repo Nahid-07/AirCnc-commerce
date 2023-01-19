@@ -12,6 +12,8 @@ import PrivateRoute from './PrivateRoute'
 import Checkout from '../Pages/Checkout'
 import DashbordLayout from '../Layout/DashbordLayout'
 import Welcome from '../Pages/dashbord/Welcome'
+import MyBookings from '../Pages/dashbord/MyBookings'
+import BecomeAHost from '../Pages/dashbord/BecomeAHost'
 
 const router = createBrowserRouter([
   {
@@ -57,6 +59,14 @@ const router = createBrowserRouter([
       {
         path: '',
         element: <Welcome></Welcome>
+      },
+      {
+        path:'my-bookings',
+        element: <PrivateRoute><MyBookings /></PrivateRoute>
+      },
+      {
+        path: 'become-host',
+        element: <PrivateRoute><BecomeAHost /></PrivateRoute>
       }
     ]
   },
