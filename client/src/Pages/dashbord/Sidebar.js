@@ -3,6 +3,7 @@ import { ArrowRightOnRectangleIcon, Bars3Icon } from '@heroicons/react/24/solid'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthProvider'
 import PrimaryButton from '../../Components/Button/PrimaryButton'
+import UserMenu from './UserMenu'
 // import UserMenu from './UserMenu'
 // import AdminMenu from './AdminMenu'
 // import HostMenu from './HostMenu'
@@ -75,8 +76,8 @@ const Sidebar = ({ role, loading }) => {
               {/* {role && role !== 'requested' ? (
                 <>{role === 'admin' ? <AdminMenu /> : <HostMenu />} </>
               ) : (
+                )} */}
                 <UserMenu />
-              )} */}
             </nav>
           </div>
         </div>
