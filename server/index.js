@@ -56,6 +56,20 @@ async function run() {
       res.send(result);
     });
 
+    // Get all the bookings
+
+    app.get('/bookings', async(req,res)=>{
+      const query = {};
+      const email = req.query.email;
+      if(email){
+        query = {
+          guestEmail : email
+        }
+      };
+      const bookings = await bookingsCollection.find(query).toArray();
+      res.send(bookings);
+    })
+
     console.log("Database Connected...");
   } finally {
   }
