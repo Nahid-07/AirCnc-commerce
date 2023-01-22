@@ -59,10 +59,10 @@ async function run() {
     // Get all the bookings
 
     app.get('/bookings', async(req,res)=>{
-      const query = {};
+      let query = {};
       const email = req.query.email;
       if(email){
-        query = {
+        query={
           guestEmail : email
         }
       };

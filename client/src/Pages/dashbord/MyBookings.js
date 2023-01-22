@@ -8,7 +8,7 @@ const MyBookings = () => {
   const { user } = useContext(AuthContext)
   const [loading, setLoading] = useState(true)
   const [bookings, setBookings] = useState([]);
-
+  // fetching data from the server
   useEffect(()=>{
     setLoading(true)
     getBookingsByEmail(user?.email)
