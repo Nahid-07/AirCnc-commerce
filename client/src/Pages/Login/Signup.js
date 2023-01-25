@@ -27,6 +27,7 @@ const Signup = () => {
     const password = e.target.password.value;
     const formData = new FormData();
     formData.append("image", image);
+    // imgbb api key
     const url =
       "https://api.imgbb.com/1/upload?key=afef7a18a343b614ef922e54a0d39132";
     // imgBB photo url
