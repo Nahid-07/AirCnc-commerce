@@ -1,11 +1,12 @@
 import React from "react";
 import { useContext } from "react";
 import { getImageUrl } from "../../api/imageUpload";
+import { hostRequest } from "../../api/user";
 import BecomeAHostForm from "../../Components/Form/BecomeAHostForm";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const BecomeAHost = () => {
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const handleSubmit = (event) => {
     event.preventDefault();
     const location = event.target.location.value;
@@ -17,9 +18,11 @@ const BecomeAHost = () => {
         location: location,
         documentImg: data,
         role: "requested",
-        email: user?.email
+        email: user?.email,
       };
       console.log(hostData);
+      hostRequest(hostData)
+        .then((data) => console.log(data));
     });
   };
   return <BecomeAHostForm handleSubmit={handleSubmit} />;
