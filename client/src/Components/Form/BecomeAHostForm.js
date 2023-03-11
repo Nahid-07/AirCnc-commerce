@@ -1,6 +1,8 @@
 import React from "react";
 
 const BecomeAHostForm = ({ handleSubmit }) => {
+
+
   return (
     <>
       <div className="flex justify-center mt-6">

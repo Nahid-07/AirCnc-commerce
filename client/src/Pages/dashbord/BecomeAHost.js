@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { getImageUrl } from "../../api/imageUpload";
-import { hostRequest } from "../../api/user";
+import { getRole, hostRequest } from "../../api/user";
 import BecomeAHostForm from "../../Components/Form/BecomeAHostForm";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const BecomeAHost = () => {
   const { user } = useContext(AuthContext);
+  const [role, setRole] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getRole(user?.email).then((data) => {
+      console.log(data);
+      setRole(data);
+      setLoading(false);
+    });
+  }, [user]);
   const handleSubmit = (event) => {
     event.preventDefault();
     const location = event.target.location.value;
@@ -20,12 +30,18 @@ const BecomeAHost = () => {
         role: "requested",
         email: user?.email,
       };
-      console.log(hostData);
-      hostRequest(hostData)
-        .then((data) => console.log(data));
+      hostRequest(hostData).then((data) => console.log(data));
     });
   };
-  return <BecomeAHostForm handleSubmit={handleSubmit} />;
+  return role ? (
+    <>
+        <div className="h-screen text-gray-600 flex flex-col justify-center items-center pb-16 text-xl lg:text-3xl">
+          Request Sent, wait for admin approval
+        </div>
+    </>
+  ) : (
+    <>{!loading && <BecomeAHostForm handleSubmit={handleSubmit} />}</>
+  );
 };
 
 export default BecomeAHost;
