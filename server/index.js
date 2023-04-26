@@ -68,6 +68,16 @@ async function run() {
       };
       const bookings = await bookingsCollection.find(query).toArray();
       res.send(bookings);
+    });
+
+    // get a single user using email
+
+    app.get('/user/:email', async(req, res)=>{
+      const email = req.params.email;
+      const query = {email : email};
+
+      const user = await usersCollection.findOne(query);
+      res.send(user)
     })
 
     console.log("Database Connected...");

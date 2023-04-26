@@ -9,6 +9,7 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   return (
+
     <header className='text-gray-900 body-font shadow-sm'>
       <div className=' mx-auto flex flex-wrap py-5 px-20 flex-col md:flex-row items-center'>
         <Link
@@ -17,6 +18,7 @@ const Navbar = () => {
         >
           <span className='ml-3 text-2xl font-bold '>Aircnc</span>
         </Link>
+        {/* Navbar start from here */}
         <nav className='md:ml-auto flex flex-wrap items-center text-base justify-center'>
           {user?.email ? (
             <>
